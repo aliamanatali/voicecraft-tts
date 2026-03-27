@@ -1,10 +1,13 @@
 ---
-title: Voicecraft Tts
-emoji: 🚀
-colorFrom: gray
-colorTo: blue
+title: VoiceCraft TTS
+emoji: 🎙️
+colorFrom: indigo
+colorTo: purple
 sdk: docker
+app_port: 7860
 pinned: false
 ---
 
-Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
+# VoiceCraft — Text to Speech with Voice Cloning
+
+Fast TTS with 108 built-in voices (VITS) + voice cloning (XTTS-v2).
