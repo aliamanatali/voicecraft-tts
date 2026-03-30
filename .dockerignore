@@ -1,0 +1,11 @@
+node_modules
+.next
+tts-server/venv
+tts-server/__pycache__
+tts-server/test_server.py
+tts-server/start.sh
+tts-server/start.bat
+tts-server/*.md
+.env
+.env.local
+.git
