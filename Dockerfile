@@ -10,7 +10,8 @@ WORKDIR /app
 COPY tts-server/requirements.txt ./tts-server/requirements.txt
 RUN pip install --no-cache-dir "transformers>=4.33.0,<5.0.0" && \
     pip install --no-cache-dir -r tts-server/requirements.txt && \
-    pip install --force-reinstall --no-cache-dir "transformers>=4.33.0,<5.0.0"
+    pip install --force-reinstall --no-cache-dir "transformers>=4.33.0,<5.0.0" && \
+    pip install --force-reinstall --no-cache-dir numpy
 
 # Copy server code
 COPY tts-server/server.py ./tts-server/server.py
