@@ -8,16 +8,10 @@ WORKDIR /app
 
 # Install Python deps
 COPY tts-server/requirements.txt ./tts-server/requirements.txt
-RUN pip install --no-cache-dir -r tts-server/requirements.txt && \
-    pip uninstall --yes transformers && \
-    pip install --no-cache-dir "transformers>=4.33.0,<5.0.0"
+RUN pip install --no-cache-dir -r tts-server/requirements.txt
 
 # Copy server code
 COPY tts-server/server.py ./tts-server/server.py
-COPY tts-server/download_models.py ./tts-server/download_models.py
-
-# Pre-download TTS models during build (saves ~5 min on cold start)
-RUN python tts-server/download_models.py
 
 # --- Node.js for frontend ---
 FROM node:20-slim AS frontend-build
