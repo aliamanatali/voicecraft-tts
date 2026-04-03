@@ -1,25 +1,23 @@
-"""Pre-download TTS models during Docker build."""
+"""Pre-download TTS model files during Docker build (download only, no loading)."""
 import warnings
 warnings.filterwarnings('ignore')
 
-import torch
-_orig = torch.load
-def _patched(*a, **kw):
-    kw.setdefault('weights_only', False)
-    return _orig(*a, **kw)
-torch.load = _patched
-
-# Monkey-patch the TOS prompt to auto-accept for XTTS-v2 (CPML license)
 from TTS.utils.manage import ModelManager
+
+# Auto-accept XTTS-v2 CPML license
 _original_ask_tos = ModelManager.ask_tos
 def _auto_accept_tos(self, *args, **kwargs):
     return True
 ModelManager.ask_tos = _auto_accept_tos
 
-from TTS.api import TTS
+manager = ModelManager()
 
 print('Downloading VITS...')
-TTS('tts_models/en/vctk/vits')
+model_path, _, _ = manager.download_model('tts_models/en/vctk/vits')
+print(f'VITS downloaded to {model_path}')
+
 print('Downloading XTTS-v2...')
-TTS('tts_models/multilingual/multi-dataset/xtts_v2')
-print('Models ready')
+model_path, _, _ = manager.download_model('tts_models/multilingual/multi-dataset/xtts_v2')
+print(f'XTTS-v2 downloaded to {model_path}')
+
+print('Models downloaded (not loaded into memory)')

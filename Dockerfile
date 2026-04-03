@@ -48,6 +48,9 @@ COPY --from=backend-deps /usr/local/lib/python3.11/site-packages /usr/local/lib/
 COPY --from=backend-deps /usr/local/bin /usr/local/bin
 COPY --from=backend-deps /app/tts-server /app/tts-server
 
+# Copy pre-downloaded TTS models from build stage
+COPY --from=backend-deps /root/.local/share/tts /root/.local/share/tts
+
 # Copy Next.js standalone build
 COPY --from=frontend-build /app/.next/standalone /app/frontend
 COPY --from=frontend-build /app/.next/static /app/frontend/.next/static
