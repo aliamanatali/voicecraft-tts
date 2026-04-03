@@ -39,10 +39,9 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
 
 WORKDIR /app
 
-# Copy Python deps and models from backend stage
+# Copy Python deps from backend stage
 COPY --from=backend-deps /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
 COPY --from=backend-deps /usr/local/bin /usr/local/bin
-COPY --from=backend-deps /root/.local/share/tts /root/.local/share/tts
 COPY --from=backend-deps /app/tts-server /app/tts-server
 
 # Copy Next.js standalone build
