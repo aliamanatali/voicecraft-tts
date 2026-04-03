@@ -33,6 +33,12 @@ def _patched_torchaudio_load(filepath, *args, **kwargs):
         return torch.from_numpy(data), sr
 torchaudio.load = _patched_torchaudio_load
 
+from TTS.utils.manage import ModelManager
+_original_ask_tos = ModelManager.ask_tos
+def _auto_accept_tos(self, *args, **kwargs):
+    return True
+ModelManager.ask_tos = _auto_accept_tos
+
 from TTS.api import TTS
 import logging
 import warnings
